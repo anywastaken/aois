@@ -35,3 +35,4 @@ class BitArrayNumber:
             value = value * 2 + b
         return value
 
+
