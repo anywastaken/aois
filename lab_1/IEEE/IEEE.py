@@ -1,8 +1,11 @@
 from BitArrayNumber import BitArrayNumber
 from IEEE.Arithmetics import Arithmetics
 
+_MANTISSA = 23
 
 class IEEE(BitArrayNumber, Arithmetics):
+    global _MANTISSA
+    
 
     def get_sign(self) -> int:
         return self.bits[0]
@@ -52,14 +55,14 @@ class IEEE(BitArrayNumber, Arithmetics):
 
         # Обработка бесконечности (+Inf и -Inf)
         if value == float('inf'):
-            return cls([0] + [1] * 8 + [0] * 23)
+            return cls([0] + [1] * 8 + [0] * _MANTISSA)
         if value == float('-inf'):
-            return cls([1] + [1] * 8 + [0] * 23)
+            return cls([1] + [1] * 8 + [0] * _MANTISSA)
 
         # Обработка нуля (различаем 0.0 и -0.0 через строку)
         if value == 0.0:
             sign = 1 if str(value) == '-0.0' else 0
-            return cls([sign] + [0] * 8 + [0] * 23)
+            return cls([sign] + [0] * 8 + [0] * _MANTISSA)
 
         # 1. знак
         sign = 0 if value >= 0 else 1
@@ -110,8 +113,8 @@ class IEEE(BitArrayNumber, Arithmetics):
         exp_bits = cls._unsigned_to_bits(exponent, 8)
 
         # 7. мантисса
-        mantissa_bits = mantissa[:23]
-        while len(mantissa_bits) < 23:
+        mantissa_bits = mantissa[:_MANTISSA]
+        while len(mantissa_bits) < _MANTISSA:
             mantissa_bits.append(0)
 
         # 8. итог
