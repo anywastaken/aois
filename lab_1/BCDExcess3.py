@@ -1,5 +1,7 @@
 from BitArrayNumber import BitArrayNumber
 
+WIDTH = 32
+
 class BCDExcess3(BitArrayNumber):
     
     @classmethod
@@ -64,7 +66,7 @@ class BCDExcess3(BitArrayNumber):
 
     def __add__(self, other: "BCDExcess3") -> "BCDExcess3":
         """Перегрузка сложения двух чисел в формате Excess-3."""
-        result_bits = [0] * 32
+        result_bits = [0] * WIDTH
         main_carry = 0
         
         # Константы для коррекции
