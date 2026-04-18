@@ -4,7 +4,7 @@ from KarnaughMap import KarnaughMap
 
 def main():
     # Ввод логической функции
-    expression_str = input("Введите логическую функцию (например, a & b | !c): ")
+    expression_str = input("Введите логическую функцию: ")
     
     try:
         expr = LogicExpression(expression_str)
@@ -97,7 +97,7 @@ def main():
     print("\n11. Минимизация табличным методом (Карта Карно):")
     results = [row['result'] for row in table_data]
     
-    if len(expr.variables) in [2, 3, 4]:
+    if len(expr.variables) in [2, 3, 4, 5]:
         kmap = KarnaughMap(results, expr.variables)
         
         # Для ДНФ
